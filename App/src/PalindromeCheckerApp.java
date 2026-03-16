@@ -1,27 +1,54 @@
 import java.util.Scanner;
 
-public class PalindromeCheck {
+public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
-        // Input string
-        System.out.print("Enter a string: ");
-        String original = sc.nextLine();
+        // UC1 - Application Entry
+        System.out.println("=================================");
+        System.out.println("Welcome to Palindrome Checker App");
+        System.out.println("Application Version: 1.0");
+        System.out.println("=================================");
 
+        // UC2 - Hardcoded Palindrome Check
+        String word = "madam";
         String reversed = "";
 
-        // Reverse the string using a for loop
-        for (int i = original.length() - 1; i >= 0; i--) {
-            reversed = reversed + original.charAt(i);
+        for(int i = word.length() - 1; i >= 0; i--) {
+            reversed = reversed + word.charAt(i);
         }
 
-        // Compare original and reversed string
-        if (original.equals(reversed)) {
-            System.out.println("The string is a Palindrome.");
+        System.out.println("Word to check: " + word);
+
+        if(word.equals(reversed)) {
+            System.out.println("Result: It is a Palindrome");
         } else {
-            System.out.println("The string is NOT a Palindrome.");
+            System.out.println("Result: It is NOT a Palindrome");
         }
 
-        sc.close();
+        // ==============================
+        // UC3 - Palindrome Check Using String Reverse (User Input)
+        // ==============================
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nEnter a word to check palindrome:");
+        String inputWord = scanner.nextLine();
+
+        String reversedInput = "";
+
+        // Reverse string using loop
+        for(int i = inputWord.length() - 1; i >= 0; i--) {
+            reversedInput = reversedInput + inputWord.charAt(i);
+        }
+
+        // Compare original and reversed
+        if(inputWord.equals(reversedInput)) {
+            System.out.println("Result: It is a Palindrome");
+        } else {
+            System.out.println("Result: It is NOT a Palindrome");
+        }
+
+        scanner.close();
     }
 }
