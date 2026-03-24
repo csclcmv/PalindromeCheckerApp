@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class PalindromeCheckerApp {
 
@@ -110,16 +112,14 @@ public class PalindromeCheckerApp {
         Stack<Character> stack2 = new Stack<>();
         Queue<Character> queue = new LinkedList<>();
 
-        // Insert into both structures
         for(int i = 0; i < inputWord.length(); i++) {
             char ch = inputWord.charAt(i);
-            stack2.push(ch);     // LIFO
-            queue.add(ch);       // FIFO
+            stack2.push(ch);
+            queue.add(ch);
         }
 
         boolean isPalindromeQS = true;
 
-        // Compare dequeue (queue) vs pop (stack)
         while(!stack2.isEmpty() && !queue.isEmpty()) {
             if(stack2.pop() != queue.remove()) {
                 isPalindromeQS = false;
@@ -131,6 +131,38 @@ public class PalindromeCheckerApp {
             System.out.println("Result (UC6): It is a Palindrome");
         } else {
             System.out.println("Result (UC6): It is NOT a Palindrome");
+        }
+
+        // ==============================
+        // UC7 - Deque-Based Optimized Check
+        // ==============================
+
+        System.out.println("\nUC7: Palindrome Check Using Deque");
+
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Insert characters into deque
+        for(int i = 0; i < inputWord.length(); i++) {
+            deque.add(inputWord.charAt(i));
+        }
+
+        boolean isPalindromeDeque = true;
+
+        // Compare front and rear
+        while(deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
+
+            if(front != rear) {
+                isPalindromeDeque = false;
+                break;
+            }
+        }
+
+        if(isPalindromeDeque) {
+            System.out.println("Result (UC7): It is a Palindrome");
+        } else {
+            System.out.println("Result (UC7): It is NOT a Palindrome");
         }
 
         scanner.close();
