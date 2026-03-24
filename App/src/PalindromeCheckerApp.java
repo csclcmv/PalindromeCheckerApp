@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 public class PalindromeCheckerApp {
 
@@ -37,12 +38,10 @@ public class PalindromeCheckerApp {
 
         String reversedInput = "";
 
-        // Reverse string using loop
         for(int i = inputWord.length() - 1; i >= 0; i--) {
             reversedInput = reversedInput + inputWord.charAt(i);
         }
 
-        // Compare original and reversed
         if(inputWord.equals(reversedInput)) {
             System.out.println("Result: It is a Palindrome");
         } else {
@@ -61,7 +60,6 @@ public class PalindromeCheckerApp {
         int end = charArray.length - 1;
         boolean isPalindrome = true;
 
-        // Two-pointer comparison
         while(start < end) {
             if(charArray[start] != charArray[end]) {
                 isPalindrome = false;
@@ -75,6 +73,33 @@ public class PalindromeCheckerApp {
             System.out.println("Result (UC4): It is a Palindrome");
         } else {
             System.out.println("Result (UC4): It is NOT a Palindrome");
+        }
+
+        // ==============================
+        // UC5 - Stack-Based Palindrome Checker
+        // ==============================
+
+        System.out.println("\nUC5: Palindrome Check Using Stack");
+
+        Stack<Character> stack = new Stack<>();
+
+        // Push characters into stack
+        for(int i = 0; i < inputWord.length(); i++) {
+            stack.push(inputWord.charAt(i));
+        }
+
+        String reversedStack = "";
+
+        // Pop characters to form reversed string
+        while(!stack.isEmpty()) {
+            reversedStack = reversedStack + stack.pop();
+        }
+
+        // Compare original and reversed
+        if(inputWord.equals(reversedStack)) {
+            System.out.println("Result (UC5): It is a Palindrome");
+        } else {
+            System.out.println("Result (UC5): It is NOT a Palindrome");
         }
 
         scanner.close();
