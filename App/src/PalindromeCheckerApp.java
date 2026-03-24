@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
 
@@ -28,7 +30,7 @@ public class PalindromeCheckerApp {
         }
 
         // ==============================
-        // UC3 - Palindrome Check Using String Reverse (User Input)
+        // UC3 - User Input (String Reverse)
         // ==============================
 
         Scanner scanner = new Scanner(System.in);
@@ -49,7 +51,7 @@ public class PalindromeCheckerApp {
         }
 
         // ==============================
-        // UC4 - Character Array Based Palindrome Check
+        // UC4 - Character Array (Two Pointer)
         // ==============================
 
         System.out.println("\nUC4: Palindrome Check Using Character Array");
@@ -76,30 +78,59 @@ public class PalindromeCheckerApp {
         }
 
         // ==============================
-        // UC5 - Stack-Based Palindrome Checker
+        // UC5 - Stack-Based
         // ==============================
 
         System.out.println("\nUC5: Palindrome Check Using Stack");
 
         Stack<Character> stack = new Stack<>();
 
-        // Push characters into stack
         for(int i = 0; i < inputWord.length(); i++) {
             stack.push(inputWord.charAt(i));
         }
 
         String reversedStack = "";
 
-        // Pop characters to form reversed string
         while(!stack.isEmpty()) {
             reversedStack = reversedStack + stack.pop();
         }
 
-        // Compare original and reversed
         if(inputWord.equals(reversedStack)) {
             System.out.println("Result (UC5): It is a Palindrome");
         } else {
             System.out.println("Result (UC5): It is NOT a Palindrome");
+        }
+
+        // ==============================
+        // UC6 - Queue + Stack Comparison
+        // ==============================
+
+        System.out.println("\nUC6: Palindrome Check Using Queue + Stack");
+
+        Stack<Character> stack2 = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
+
+        // Insert into both structures
+        for(int i = 0; i < inputWord.length(); i++) {
+            char ch = inputWord.charAt(i);
+            stack2.push(ch);     // LIFO
+            queue.add(ch);       // FIFO
+        }
+
+        boolean isPalindromeQS = true;
+
+        // Compare dequeue (queue) vs pop (stack)
+        while(!stack2.isEmpty() && !queue.isEmpty()) {
+            if(stack2.pop() != queue.remove()) {
+                isPalindromeQS = false;
+                break;
+            }
+        }
+
+        if(isPalindromeQS) {
+            System.out.println("Result (UC6): It is a Palindrome");
+        } else {
+            System.out.println("Result (UC6): It is NOT a Palindrome");
         }
 
         scanner.close();
